@@ -14,7 +14,7 @@ d = -0.15; % disturbio
 td = 15; % tempo de inicio do disturbio
 ess = 14.5; % erro de estado estacionário
 
-Kp=10;
+Kp=1;
 %Kp = 5.8965517241379310344827586206897; % constante proporcional
 
 nyquist = 10; % Proporção entre banda e amostragem.
@@ -55,7 +55,7 @@ my_wb = bandwidth(Gmf);
 my_w0=10*my_wb;
 my_f0 = my_w0/(2*pi);
 my_T0 = 1/my_f0
-fprintf("\nKp = %d - B = %.3f", Kp, my_wb);
+fprintf("\nKp = %d - B = %.3f - T0 = %.3f", Kp, my_wb, my_T0);
 ess_abs = ess*0.01*R
 
 
