@@ -14,7 +14,7 @@
 ### *Tarefa 7&8*: 
 🫠 Adicionar o polo na função de transferência do controlador PID e refazer os gráficos. 
 
-## *Tarefa 9&10*:
+### *Tarefa 9&10*:
 🙂 Terminar!
 
 ---
