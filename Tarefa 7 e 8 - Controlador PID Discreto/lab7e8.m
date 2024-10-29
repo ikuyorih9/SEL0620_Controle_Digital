@@ -30,13 +30,13 @@ end;
 % QUESTÃO 3:
 fprintf("\n-> QUESTÃO 3:\n");
 [Gznum, Gzden] = tfdata(minreal(Gpid), 'v');
-fprintf("Gpid(z) = (%.3f + %.3f z^-1 + %.3f z^-2)/(%.3f + %.3fz^-1)\n", Gznum(1), Gznum(2), Gznum(3), Gzden(2), Gzden(3));
+fprintf("Gpid(z) = (%.3f + %.3f z^-1 + %.3f z^-2)/(%.3f + %.3fz^-1)\n", Gznum(1), Gznum(2), Gznum(3), Gzden(1), Gzden(2));
 
 % QUESTÃO 4:
 fprintf("\n-> QUESTÃO 4:\n");
 Gmfz = feedback(Gpid*Gz, 1);
 [Gmnum,Gmden] = tfdata(Gmfz, 'v');
-fprintf("Gmf(z) = (%.3f + %.3f z^-1 + %.3f z^-2 + %.3f z^-3)/(%.3f + %.3fz^-1 + %.3f z^-2 + %.3f z^-3)\n", Gmnum(1), Gmnum(2), Gmnum(3), Gmnum(4), Gmden(1), Gmden(2), Gmden(3), Gmden(4));
+fprintf("Gmf(z) = (%.3f + %.3f z^-1 + %.3f z^-2 + %.3f z^-3 + + %.3f z^-4)/(%.3f + %.3fz^-1 + %.3f z^-2 + %.3f z^-3 + %.3f z^-4)\n", Gmnum(1), Gmnum(2), Gmnum(3), Gmnum(4), Gmnum(5), Gmden(1), Gmden(2), Gmden(3), Gmden(4), Gmden(5));
 
 
 %QUESTÃO 5:
@@ -96,7 +96,7 @@ figure
 step(R*Gzpid, 'b');
 hold on;
 step(R*Gzp, 'r');
-title('Entrada da planta do sistema de malha fechada')
+title('Saida do sistema de malha fechada')
 xlabel('Tempo (t)')
 ylabel('Amplitude y(t)')
 legend({'Controlador PID', 'Controlador P'}, 'Location', 'southeast');
