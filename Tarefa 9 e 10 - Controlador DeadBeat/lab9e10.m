@@ -21,29 +21,38 @@ H0GP = c2d(G, T0, 'zoh')
 [H0GPnum, H0GPden] = tfdata(H0GP,'v');
 disp(H0GPnum)
 disp(H0GPden)
+
+% COEFICIENTES DA PLANTA COM ZERO HOLDER.
+b0 = H0GPnum(1);
+b1 = H0GPnum(2);
+b2 = H0GPnum(3);
+
+a0 = H0GPden(1);
+a1 = H0GPden(2);
+a2 = H0GPden(3);
+
 % QUESTÃO 1:
+% Dead beat de ordem 2:
 
-% DEAD BEAT DE ORDEM 2:
+q0 = 1/(b1+b2);
+q1 = a1*q0;
+q2 = a2*q0;
 
-q0 = 1/sum(H0GPnum)
-q1 = H0GPden(2)*q0
-q2 = H0GPden(3)*q0
-
-p1 = H0GPnum(2)*q0;
-p2 = H0GPnum(3)*q0;
+p1 = b1*q0;
+p2 = b2*q0;
 
 Gdb = tf([q0 q1 q2], [1 -p1 -p2], T0)
 
 % DEAD BEAT DE ORDEM 3
 
 Q0 = 0.8*q0;
-Q1 = Q0*(H0GPden(2)-1) + 1/sum(H0GPnum);
-Q2 = Q0*(H0GPden(3)-H0GPden(2)) + H0GPden(2)/sum(H0GPnum);
-Q3 = H0GPden(3)*(-Q0 + 1/sum(H0GPnum));
+Q1 = Q0*(a1-1) + 1/(b1+b2);
+Q2 = Q0*(a2-a1) + a1/(b1+b2);
+Q3 = a2*(-Q0 + 1/(b1+b2));
 
-P1 = Q0*H0GPnum(2);
-P2 = Q0*(H0GPnum(3)-H0GPnum(2) + H0GPnum(2)/sum(H0GPnum));
-P3 = H0GPnum(3)*(-Q0 + 1/sum(H0GPnum));
+P1 = Q0*b1;
+P2 = Q0*(b2 - b1) + b1/(b1+b2);
+P3 = b2*(-Q0 + 1/(b1+b2));
 
 Gdb3 = tf([Q0 Q1 Q2 Q3], [1 -P1 -P2 -P3], T0)
 
@@ -52,8 +61,8 @@ Gdb3 = tf([Q0 Q1 Q2 Q3], [1 -P1 -P2 -P3], T0)
 %polos = pole(Gmfz)
 
 % QUESTÃO 3: simulink
-
-% QUESTÃO 4:
+%open_system('tarefa9e10.slx');
+out = sim('tarefa9e10', 'SimulationMode', 'normal');
 
 figure
 stairs (out.erro2.Time, out.erro2.Data, 'b')
@@ -64,7 +73,7 @@ xlabel('Tempo (t)')
 ylabel('Amplitude y(t)')
 legend({'GDB(2)', 'GDB(3)'}, 'Location', 'southeast');
 %axis([0 30 1 2]);
-exportgraphics(gca, 'Figuras/fig-erro2.png');
+% %exportgraphics(gca, 'Figuras/fig-erro.png');
 
 figure
 stairs (out.planta2.Time, out.planta2.Data, 'b')
@@ -74,8 +83,8 @@ title('Entrada da planta do sistema Dead Beat de malha fechada')
 xlabel('Tempo (t)')
 ylabel('Amplitude y(t)')
 legend({'GDB(2)', 'GDB(3)'}, 'Location', 'southeast');
-%axis([0 30 1 2]);
-exportgraphics(gca, 'Figuras/fig-erro2.png');
+axis([0 2 -11 11]);
+% %exportgraphics(gca, 'Figuras/fig-planta.png');
 
 figure
 stairs (out.saida2.Time, out.saida2.Data, 'b')
@@ -86,4 +95,23 @@ xlabel('Tempo (t)')
 ylabel('Amplitude y(t)')
 legend({'GDB(2)', 'GDB(3)'}, 'Location', 'southeast');
 %axis([0 30 1 2]);
-exportgraphics(gca, 'Figuras/fig-erro2.png');
+%exportgraphics(gca, 'Figuras/fig-saida.png');
+
+% QUESTÃO 5
+info2 = stepinfo(out.saida2.Data, out.saida2.Time);
+fprintf("\nGBD(2): Rise Time: %.3f e Settling time: %.3f e Overshoot: %.3f.", info2.RiseTime,info2.SettlingTime, info2.Overshoot);
+
+info3 = stepinfo(out.saida3.Data, out.saida3.Time);
+fprintf("\nGBD(3): Rise Time: %.3f e Settling time: %.3f e Overshoot: %.3f.", info3.RiseTime,info3.SettlingTime, info3.Overshoot);
+
+figure
+stairs (out.erro2.Time, out.erro2.Data, 'b')
+title('Erro do sistema Dead Beat ordem 2')
+xlabel('Tempo (t)')
+ylabel('Amplitude y(t)')
+
+figure
+stairs (out.erro3.Time, out.erro3.Data, 'r')
+title('Erro do sistema Dead Beat ordem 3')
+xlabel('Tempo (t)')
+ylabel('Amplitude y(t)')

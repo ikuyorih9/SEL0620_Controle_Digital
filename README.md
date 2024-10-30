@@ -7,12 +7,11 @@
 * [x] ~~16/10 - Tarefa 4/5: Controle Proporcional~~
 * [x] ~~16/10 - Tarefa 6: Espaço de Estados~~
 * [x] ~~06/11 - Tarefa 7&8: Controlador PID Discreto~~
-* [ ] 13/11 - Tarefa 9&10: Controlador Dead Beat
+* [x] ~~13/11 - Tarefa 9&10: Controlador Dead Beat~~
 
 ## 📃 Ainda falta...
 
-### *Tarefa 9&10*:
-🙂 Terminar!
+😎 NADA!
 
 ---
 A seguir, imagem de um controle digital:
