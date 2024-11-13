@@ -8,11 +8,12 @@
 * [x] ~~16/10 - Tarefa 6: Espaço de Estados~~
 * [x] ~~06/11 - Tarefa 7&8: Controlador PID Discreto~~
 * [x] ~~13/11 - Tarefa 9&10: Controlador Dead Beat~~
-
+* [ ] 27/11 - Tarefa 11: Controle por Realimentação de Estados
+* [ ] 
 ## 📃 Ainda falta...
 
-😎 NADA!
-
+🐌 Tarefa 11: simulink;
+😓 Tarefa 12: TUDO!
 ---
 A seguir, imagem de um controle digital:
 
