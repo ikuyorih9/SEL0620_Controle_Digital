@@ -50,6 +50,7 @@ disp(p.');
 
 %QUESTÃO 6 E 7: SIMULINK
 pid(Gpid)
+out = sim('tarefa7e8', 'SimulationMode', 'normal');
 
 close all;
 
