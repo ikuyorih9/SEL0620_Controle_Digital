@@ -13,7 +13,6 @@
 * [ ] 11/12 - Tarefa 13: Realimentação de Estados com Ação Integrativa
 ## 📃 Ainda falta...
 
-* 🧐 Tarefa 12: preciso verificar se tá certa... Os estados do observador saíram meio estranhos.
 * 😫 Tarefa 13: TUDO!
 
 ---
