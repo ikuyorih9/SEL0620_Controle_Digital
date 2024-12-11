@@ -1,3 +1,4 @@
+clear all;
 close all;
 % Variaveis iniciais.
 R = 1.25;
@@ -20,57 +21,36 @@ K = place(F,H,polos_dominantes)
 
 F2 = [F zeros(2,1); -Cd 1]
 H2 = [H; 0]
+C2 = [Cd 0]
 
 Pd2 = [polos_dominantes 0.734];
-[K2 ki] = place(F2, H2 ,Pd2)
+K2 = place(F2, H2 ,Pd2)
 
 out = sim('tarefa13', 'SimulationMode', 'normal');
 
-% % Questão 4:
-% figure
-% stairs (out.u.Time, out.u.Data, 'b')
-% title('Entrada u(t) do sistema.')
-% xlabel('Tempo (t)')
-% ylabel('Amplitude')
-
-% exportgraphics(gca, 'Figuras/fig - u.png');
-
-% figure
-% stairs (out.xd.Time, out.xd.Data(:,1), 'b')
-% hold on;
-% stairs (out.xd.Time, out.xd.Data(:,2), 'r')
-% title('Estados x1(t) e x2 do sistema.')
-% legend('X1','X2')
-% xlabel('Tempo (t)')
-% ylabel('Amplitude')
-% %axis([0 30 -0.1 0.5])
-
-% exportgraphics(gca, 'Figuras/fig - x.png');
-
+% Questão 4:
 figure
-stairs (out.y1.Time, out.y1.Data, 'b')
-title('Saída y(t).')
-legend('Sem ação integrativa','Com ação integrativa', 'Location', 'southwest')
+stairs (out.u2.Time, out.u2.Data, 'r')
+title('Entrada u[k] do sistema.')
 xlabel('Tempo (t)')
 ylabel('Amplitude')
-%axis([0 30 0 10]);
+exportgraphics(gca, 'Figuras/fig - u.png');
 
 figure
 stairs (out.y2.Time, out.y2.Data, 'r')
-title('Saída y(t).')
-legend('Sem ação integrativa','Com ação integrativa', 'Location', 'southwest')
+title('Saída y[k] do sistema.')
 xlabel('Tempo (t)')
 ylabel('Amplitude')
-%axis([0 30 0 10]);
+exportgraphics(gca, 'Figuras/fig - y.png');
 
-% figure
-% stairs (out.y1.Time, out.y1.Data, 'b')
-% hold on;
-% stairs (out.y2.Time, out.y2.Data, 'r')
-% title('Saída y(t).')
-% legend('Sem ação integrativa','Com ação integrativa', 'Location', 'southwest')
-% xlabel('Tempo (t)')
-% ylabel('Amplitude')
-% axis([0 30 0 10]);
-
-% exportgraphics(gca, 'Figuras/fig - y.png');
+figure
+stairs (out.x2.Time, out.x2.Data(:,1), 'b')
+hold on;
+stairs (out.x2.Time, out.x2.Data(:,2), 'r')
+hold on;
+stairs (out.q.Time, out.q.Data, 'black')
+title('Estados x1[k], x2[k] e q[k] do sistema.')
+legend('x1[k]','x2[k]', 'q[k]', 'Location', 'southeast')
+xlabel('Tempo (t)')
+ylabel('Amplitude')
+exportgraphics(gca, 'Figuras/fig - xq.png');
